@@ -1,0 +1,17 @@
+---
+- hosts: vm
+  user: ubuntu
+  tasks:
+    - name: Lab2
+      command: echo "Hi"
+    - name: Update hostname
+      become: yes
+      lineinfile:
+        path: /etc/hostname
+        line: "name-surename-lab2"
+      register: hostname_result
+
+    - name: Print hostname update result
+      debug:
+        msg: "Hostname updated successfully: {{ hostname_result }}"
+
