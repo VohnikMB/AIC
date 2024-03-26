@@ -1,0 +1,12 @@
+---
+- name: Install Git
+  hosts: vm
+  become: yes
+
+  tasks:
+    - name: Include OS-specific Git installation tasks
+      include_tasks: roles/git/main.yml
+
+  # Optionally include meta and vars files
+  # meta: include_vars ../meta/main.yml
+  # vars: include_vars ../vars/main.yml

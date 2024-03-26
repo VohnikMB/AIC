@@ -1,5 +1,63 @@
+#- name: Install MariaDB server
+#  hosts: vm
+#  become: yes
+#  vars:
+#    mariadb_package: "{{ mariadb_package | default('mariadb-server') }}"
+#  roles:
+#    - install_mariadb
+
 ---
 - hosts: vm
+  tasks:
+    - name: Install MariaDB server
+      include_role:
+        name: install_mariadb
+
+    - name: Debugging message
+      debug:
+        msg: "The installation of MariaDB server is complete."
+
+    - name: Check MariaDB service status
+      command: systemctl status mariadb
+      register: mariadb_status
+      ignore_errors: true
+
+    - name: Debug MariaDB service status
+      debug:
+        msg: "MariaDB service is {{ 'running' if mariadb_status.rc == 0 else 'not running' }}"
+
+############
+
+---
+- name: Install Git
+  hosts: vm
   become: yes
-  roles:
-    - package_installer
+
+  tasks:
+    - name: Install Git package
+      package:
+        name: git
+        state: present
+
+    - name: Check Git version
+      command: git --version
+      register: git_version
+
+    - name: Debug Git version
+      debug:
+        msg: "Git version is {{ git_version.stdout }}"
+
+    - name: Gather facts
+      ansible.builtin.setup:
+    
+    - name: Install Git package (Debian/Ubuntu)
+      ansible.builtin.package:
+        name: git
+        state: present
+      when: ansible_facts['os_family'] == 'Debian'
+    
+    - name: Install Git package (RedHat/CentOS)
+      ansible.builtin.package:
+        name: git
+        state: present
+      when: ansible_facts['os_family'] == 'RedHat'

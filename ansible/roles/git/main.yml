@@ -1,0 +1,7 @@
+- import_tasks: check_git_version.yml
+
+- import_tasks: install_git_debian.yml
+  when: ansible_facts['os_family'] == 'Debian'
+
+- import_tasks: install_git_redhat.yml
+  when: ansible_facts['os_family'] == 'RedHat'

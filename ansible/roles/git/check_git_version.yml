@@ -1,0 +1,15 @@
+- name: Install Git package
+  package:
+    name: git
+    state: present
+
+- name: Check Git version
+  command: git --version
+  register: git_version
+
+- name: Debug Git version
+  debug:
+    msg: "Git version is {{ git_version.stdout }}"
+
+- name: Gather facts
+  ansible.builtin.setup:
