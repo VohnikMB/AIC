@@ -5,8 +5,6 @@
 
   tasks:
     - name: Include OS-specific Git installation tasks
-      include_tasks: roles/git/main.yml
-
-  # Optionally include meta and vars files
-  # meta: include_vars ../meta/main.yml
-  # vars: include_vars ../vars/main.yml
+      include_tasks: roles/git/tasks/main.yml
+  meta: include_vars roles/git/meta/main.yml
+  vars: include_vars roles/git/vars/main.yml

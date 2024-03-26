@@ -1,3 +1,0 @@
----
-- name: Install package based on OS
-  include_tasks: "{{ ansible_distribution }}.yml"

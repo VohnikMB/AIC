@@ -1,3 +1,0 @@
-# roles/install_mariadb/defaults/main.yml
-
-mariadb_package: "mariadb-server"

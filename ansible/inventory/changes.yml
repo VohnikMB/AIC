@@ -8,7 +8,7 @@
       become: yes
       lineinfile:
         path: /etc/hostname
-        line: "name-surename-lab2"
+        line: "Bogdan-Masniak-lab2"
       register: hostname_result
 
     - name: Print hostname update result
