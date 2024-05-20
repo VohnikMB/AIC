@@ -1,3 +1,4 @@
 
 ansible/inventory/elk.pem
 ansible/inventory/nkey.pem
+.vs/
